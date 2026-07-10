@@ -2,13 +2,13 @@
 
 <html>
 
-    <body style="background-color: #FFD500; color: #222222; font-family: Arial, Helvetica, sans-serif; text-align: center; padding: 20px; background-image: url(./legomovie.jpg); background-size: cover;">
+    <body style="background-color: #FFD500; color: #222222; font-family: Arial, Helvetica, sans-serif; text-align: center; padding: 20px; background-image: url(./legomovie.jpg); background-size: cover; height: 90vh;":>
 
-        <div style="display:flex; justify-content: space-between; position: absolute; width: 100%; backdrop-filter: blur(100px); background-color: rgba(255, 238, 0, 0.774); color: #D01012; margin:0; top: 0; left: 0; right: 0;">
+        <div style="display:flex; justify-content: space-between; position: absolute; width: 100%; backdrop-filter: blur(100px); background-color: rgba(255, 238, 0, 0.774); color: #D01012; margin:0; bottom: 0; left: 0; right: 0; height: 60px; border-top: 3px solid #222222;">
         
-            <p style="margin-left: 40px;">BrickOS</p>
+            <p style="margin-left: 40px; font-weight: 750; padding: 8px; border-radius: 16px;">BrickOS</p>
 
-            <p style="margin-right: 40px">7/10/2026 3:45 PM</p>
+            <p id="timeElement" style="margin-right: 40px; font-weight: 750; padding: 8px; border-radius: 16px;">7/10/2026 3:45 PM</p>
 
         </div>
 
@@ -24,38 +24,19 @@
             <p style="font-size: 18px; margin: 15px;"> Hi, welcome to my LEGO themes operating system. Lego has been one of my favorite hobbies because it lets be build and create big or small projects, letting me have fun in a creative way.</p>
         </div>
 
-            <h2 style="margin: 5px;">Favorite LEGO Themes</h2>
+        <script>
 
-            <p style="margin: 5px;">Some of my favorite LEGO themes are:</p>
+            function updateTime() {
 
-            <ul style="display: inline-block; text-align: left;  font-size: 18px;">
-                <li>LEGO Star Wars</li>
-                <li>LEGO Harry Potter</li>
-                <li>LEGO Marvel</li>
-                <li>LEGO Technic</li>
-            </ul>
+                var currentTime = new Date().toLocaleString();
 
-            <p style="font-size: 18px">Visit the actual LEGO website:
-                <a href="https://www.lego.com" style="color: #0055BF;">LEGO</a>
-            </p>
+                var timeText = document.querySelector("#timeElement");
 
-            <h2 style="margin: 5px;">Fun Fact</h2>
+                timeText.innerHTML = currentTime
 
-            <p>The word <strong>LEGO</strong> comes from the Danish words "Leg Godt, which means "Play Well."</p>
+            }
 
-            <p>Brick is the basic building block used in Lego sets.</p>
+            setInterval(updateTime, 1000);
+        </script>
 
-            <p>Every build is designed by many engineers who come together and go through a huge process of designing, engineering, and testing the LEGO sets.</p>
-
-
-            <p style="font-size: 20px; color: #D01012;">Build.<br>
-            Create.<br>
-            Share.</p>
-
-            <img src="./legoman.jpg" style="width: 180px; height: auto; border-radius: 15px; margin: 15px;"/>
-
-
-
-        </body>
-
-</html>
+    </body>
