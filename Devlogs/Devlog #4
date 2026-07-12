@@ -1,0 +1,4 @@
+I added a new OS.css where now all the CSS styling is moved to to this file instead of being cramped in the HTML page. 
+Along with this there was a problem where when I wanted to close out of a window, where I could close the window anywhere in between the top in between and and X of the window which interfered with the dragging of the window, since if I dragged on that side it would drag and as soon as I let go, it would close out of that window. 
+I was trying to change th4e JavaScript to see if it was the problem, but I saw that in the CSS, there was an element to make the X flex: 1, so as soon as I took that out, it started working. 
+Overall, I fixed a crucial error in the OS making it work properly and better and made the code more readable by adding a CSS page.
