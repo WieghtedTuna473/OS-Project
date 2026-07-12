@@ -1,42 +1,48 @@
 <!DOCTYPE html>
-
 <html>
+    <head>
 
-    <body style="background-color: #FFD500; color: #222222; font-family: Arial, Helvetica, sans-serif; text-align: center; padding: 20px; background-image: url(./legomovie.jpg); background-size: cover; height: 90vh;":>
+        <link rel="stylesheet" href="OS.css" />
 
-        <div style="display:flex; justify-content: space-between; position: absolute; width: 100%; backdrop-filter: blur(100px); background-color: rgba(255, 238, 0, 0.774); color: #D01012; margin:0; bottom: 0; left: 0; right: 0; height: 60px; border-top: 3px solid #222222;">
+    </head>
+
+    <body>
+
+        <div id="taskbar">
         
-            <p style="margin-left: 40px; font-weight: 750; padding: 8px; border-radius: 16px;">BrickOS</p>
+            <p id="welcomeopen">BrickOS (Click to open Introduction)</p>
 
-            <p id="timeElement" style="margin-right: 40px; font-weight: 750; padding: 8px; border-radius: 16px;">7/10/2026 3:45 PM</p>
+            <p id="timeElement">7/10/2026 3:45 PM</p>
 
         </div>
 
-        <div style="background-color: #FFD500; border:solid; width: 600px; border-radius: 16px; padding: 20px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <div id="window">
 
-            <h1 style="margin: 5px; color: #D01012; font-size: 48px;">Welcome to BrickOS</h1>
+            <div id="windowheader">
+                
+                <span class="header-space"></span>
+                
+                <span>Welcome</span>
+                
+                <span id="welcomeclose">✕</span>
+            
+            </div>
 
-            <h2 style="margin: 5px; color:#0055BF">Introduction</h2>
+            <div class="window-content">
 
-            <h3>Everything is Awesome!</h3>
+                <h1>Welcome to BrickOS</h1>
 
+                <h2>Introduction</h2>
 
-            <p style="font-size: 18px; margin: 15px;"> Hi, welcome to my LEGO themes operating system. Lego has been one of my favorite hobbies because it lets be build and create big or small projects, letting me have fun in a creative way.</p>
+                <h3>Everything is Awesome!</h3>
+
+                <p> Hi, welcome to my LEGO themes operating system. Lego has been one of my favorite hobbies because it lets be build and create big or small projects, letting me have fun in a creative way.</p>
+
+            </div>
+
         </div>
 
-        <script>
-
-            function updateTime() {
-
-                var currentTime = new Date().toLocaleString();
-
-                var timeText = document.querySelector("#timeElement");
-
-                timeText.innerHTML = currentTime
-
-            }
-
-            setInterval(updateTime, 1000);
-        </script>
+        <script src="OSscript.js"></script>
 
     </body>
+</html>
