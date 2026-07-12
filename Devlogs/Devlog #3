@@ -1,0 +1,6 @@
+I made BrickOS start to feel more like an operating system by adding a new features such as window dragging. 
+I made the welcome screen more like a window by changing the colors a little to make it look better by adding a title bar, a close button, a border, and a shadow as well. 
+I also added draggable windows where the welcome window can be clicked and dragged around by the title bar using mouse functions to track where the mouse is going and also update the windows position. 
+Clicking the X button hides the window and clicking the BrickOS on the bottom taskbar brings it back. 
+I also added a new OSscript.js to make the JavaScript loof better instead of making it all be in the HTML. 
+Overall, now it is starting to function more like a OS with windows that can move and can be gotten out of, with now the goal in mind being adding applications that can be clicked.
