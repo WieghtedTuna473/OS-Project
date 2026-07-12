@@ -1,0 +1,5 @@
+I built the welcome screen for my operating system, BrickOS, which is inspired by my passion for LEGO’s. 
+I created a basic HTML structure for the homepage and added heading, paragraphs, images, and a link to the official LEGO website. 
+I also added a list of my favorite type of LEGO’s to build to make the ppage more personalized towards me. 
+Then I learned to style the elements with inline CSS. 
+I just started by trying to match the LEGO themes by adding a font and a background color along with a red “Welcome to BrickOS.”
