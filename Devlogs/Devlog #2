@@ -1,0 +1,6 @@
+I continued to develop the welcome home screen for my BrickOS by making it look more like an interface of an operating system instead of just making it look like a webpage. 
+I added a simple taskbar to the bottom of my screen with the OS name and a date and time that works. 
+I also improved the layout by centering the welcome window which is a basic information screen about the OS. 
+I also added a background image from the LEGO movie that fits my OS. 
+I wrote my first JavaScript function for the project, helping me create a live clock using Date() and setInterval(). 
+I overall improved the desktop to look more like a desktop instead of just a webpage and learned to have more dynamic elements such as the time.
