@@ -16,15 +16,15 @@
 
         </div>
 
-        <div id="window">
+        <div id="window" class="window">
 
-            <div id="windowheader">
+            <div id="windowheader" class="windowheader">
                 
                 <span class="header-space"></span>
                 
                 <span>Welcome</span>
                 
-                <span id="welcomeclose">✕</span>
+                <span id="welcomeclose" class="welcomeclose">✕</span>
             
             </div>
 
@@ -42,7 +42,86 @@
 
         </div>
 
+        <div id="desktopApps" style="padding-top: 5px;">
+
+            <div class="desktop-icon" onclick="openWindow(imageScreen)" style="margin-top: 5px;">
+
+                <img src="./images/camera.png" class="desktop-icon-img">
+
+                <p class="desktop-icon-label">Images</p>
+
+            </div>
+
+            <div class="desktop-icon" onclick="openWindow(notesScreen)" style="margin-top: 20px;">
+
+                <img src="./images/notes.png" class="desktop-icon-img">
+
+                <p class="desktop-icon-label">Notes</p>
+
+            </div>
+
+        </div>
+
+        <div id="images" class="window" style="display: none;">
+
+            <div class="windowheader" id="imagesheader">
+                
+                <span class="header-space"></span>
+                
+                <span>Images</span>
+                
+                <span id="imageclose" class="welcomeclose">✕</span>
+            
+            </div>
+
+            <div class="window-content" id="image-content">
+
+                <img src="./images/image1.jpg" class="img-app">
+
+                <img src="./images/image2.jpg" class="img-app">
+
+                <img src="./images/image3.jpeg" class="img-app">
+
+            </div>
+
+        </div>
+
+        <div id="notes" class="window" style="display: none;">
+
+            <div class="windowheader" id="notesheader">
+
+                <span class="header-space"></span>
+
+                <span>Notes</span>
+
+                <span id="notesclose" class="welcomeclose">X</span>
+
+            </div>
+
+            <div class="notes-body">
+
+                <div class="notes-sidebar-wrapper">
+
+                    <div class="notes-sidebar" id="sidebar">
+
+                    </div>
+
+                    <span id="newNote" class="new-note-button">+ New Note</span>
+
+                </div>
+
+                <div class="notes-content" id="notesContent" contenteditable="true">
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
         <script src="OSscript.js"></script>
 
     </body>
+
 </html>
