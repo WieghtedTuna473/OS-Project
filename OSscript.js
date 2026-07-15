@@ -1,29 +1,36 @@
+/* ======================================================================
+                            Global Variables
+====================================================================== */
 var dragged = false;
+var biggestIndex = 1;
+var selectedIcon = undefined;
+var currentNoteIndex = 0;
 
+var timeText = document.querySelector("#timeElement");
+var topBar = document.querySelector("#taskbar");
+
+/* ======================================================================
+                            Clock
+====================================================================== */
 function updateTime() {
 
     var currentTime = new Date().toLocaleString();
 
-    var timeText = document.querySelector("#timeElement");
-
-    timeText.innerHTML = currentTime
+    timeText.innerHTML = currentTime;
 
 }
 
 setInterval(updateTime, 1000);
 
-
-dragElement(document.getElementById("window"));
-
+/* ======================================================================
+                            Dragging Windows
+====================================================================== */
 function dragElement(element) {
 
-    var initialX=0;
-
-    var initialY=0;
-
-    var currentX=0;
-
-    var currentY=0;
+    var initialX = 0;
+    var initialY = 0;
+    var currentX = 0;
+    var currentY = 0;
 
     if (document.getElementById(element.id + "header")) {
 
@@ -103,46 +110,64 @@ function dragElement(element) {
 
     }
 
-      function stopDragging() {
+    function stopDragging() {
 
         document.onmouseup = null;
 
         document.onmousemove = null;
-    
+
     }
 
 }
 
-var welcomeScreen = document.querySelector("#window")
-
-var welcomeScreenClose = document.querySelector("#welcomeclose")
-
-var welcomeScreenOpen = document.querySelector("#welcomeopen")
-
+/* ======================================================================
+                            Window Open and Close
+====================================================================== */
 function closeWindow(element) {
 
-    element.style.display = "none"
+    element.style.display = "none";
 
 }
 
-welcomeScreenClose.addEventListener("click", function(e) {
+function openWindow(element) {
 
-    if (e.target.id === "welcomeclose") {
+    element.style.top = "";
 
-        closeWindow(welcomeScreen);
+    element.style.left = "";
 
-    }
+    element.style.transform = "";
 
-});
+    element.style.display = "block";
 
-welcomeScreenOpen.addEventListener("click", function() {
+    biggestIndex++;
 
-    openWindow(welcomeScreen);
+    element.style.zIndex = biggestIndex;
 
-});
+    topBar.style.zIndex = biggestIndex + 1;
 
-var selectedIcon = undefined
+}
 
+function handleWindowTap(element) {
+
+    biggestIndex++;
+
+    element.style.zIndex = biggestIndex;
+
+    topBar.style.zIndex = biggestIndex + 1;
+
+    deselectIcon(selectedIcon);
+
+}
+
+function addWindowTapHandling(element) {
+
+    element.addEventListener("mousedown", () => handleWindowTap(element));
+
+}
+
+/* ======================================================================
+                            Desktop Icons
+====================================================================== */
 function selectIcon(element) {
 
     element.classList.add("desktop-icon");
@@ -163,35 +188,146 @@ function handleIconTap(element) {
 
     if (element.classList.contains("desktop-icon-selected")) {
 
-        deselectIcon(element)
+        deselectIcon(element);
 
-        openWindow(window)
+        openWindow(window);
 
     } else {
 
-        selectIcon (element)
+        selectIcon(element);
 
     }
 
 }
 
-dragElement(document.querySelector("#images"))
+/* ======================================================================
+                            Welcome Window
+====================================================================== */
+var welcomeScreen = document.querySelector("#window");
+var welcomeScreenClose = document.querySelector("#welcomeclose");
+var welcomeScreenOpen = document.querySelector("#welcomeopen");
 
-var imageScreen = document.querySelector("#images")
+dragElement(welcomeScreen);
 
-var imageScreenClose = document.querySelector("#imageclose")
+welcomeScreenClose.addEventListener("click", function(e) {
+
+    if (e.target.id === "welcomeclose") {
+
+        closeWindow(welcomeScreen);
+
+    }
+
+});
+
+welcomeScreenOpen.addEventListener("click", function() {
+
+    openWindow(welcomeScreen);
+
+});
+
+/* ======================================================================
+                            Images App
+====================================================================== */
+var imageScreen = document.querySelector("#images");
+var imageScreenClose = document.querySelector("#imageclose");
+
+dragElement(imageScreen);
 
 imageScreenClose.addEventListener("click", () => closeWindow(imageScreen));
 
-dragElement(document.querySelector("#notes"))
+/* ======================================================================
+                            Notes App
+====================================================================== */
+var notesScreen = document.querySelector("#notes");
+var notesScreenClose = document.querySelector("#notesclose");
+var newNoteButton = document.querySelector("#newNote");
+var notesContentDiv = document.querySelector("#notesContent");
 
-var notesScreen = document.querySelector("#notes")
+var content = [
 
-var notesScreenClose = document.querySelector("#notesclose")
+    {
+
+        title: "Welcome",
+
+        date: "7/14/2026",
+
+        content: `
+            <div class="notes-content" contenteditable="true">
+
+                Welcome to <strong>BrickOS Notes</strong>
+                <br>
+                This is your app inside BrickOS to keep your thoughts, plans, or anything else you want, including ideas LEGO related! Remember, There is no end to <strong>CREATIVITY!</strong>
+                <br>
+                From, Me
+
+            </div>
+        `
+
+    }
+
+];
+
+dragElement(notesScreen);
 
 notesScreenClose.addEventListener("click", () => closeWindow(notesScreen));
 
-var newNoteButton = document.querySelector("#newNote")
+function setNotesContent(index) {
+
+    currentNoteIndex = index;
+
+    notesContentDiv.innerHTML = content[index].content;
+
+}
+
+function addToSideBar(index) {
+
+    var sidebar = document.querySelector("#sidebar");
+
+    var note = content[index];
+
+    var newDiv = document.createElement("div");
+
+    newDiv.className = "notes-sidebar-item";
+
+    newDiv.innerHTML = `
+
+        <p class="notes-sidebar-title">
+            ${note.title}
+        </p>
+
+        <p class="notes-sidebar-date">
+            ${note.date}
+        </p>
+
+    `;
+
+    newDiv.addEventListener("click", function() {
+
+        setNotesContent(index);
+
+    });
+
+    sidebar.appendChild(newDiv);
+
+}
+
+function saveNotes() {
+
+    localStorage.setItem("brickos-notes", JSON.stringify(content));
+
+}
+
+function loadNotes() {
+
+    var saved = localStorage.getItem("brickos-notes");
+
+    if (saved) {
+
+        content = JSON.parse(saved);
+
+    }
+
+}
 
 newNoteButton.addEventListener("click", function() {
 
@@ -219,152 +355,6 @@ newNoteButton.addEventListener("click", function() {
 
 });
 
-var biggestIndex = 1;
-
-function addWindowTapHandling(element) {
-    
-    element.addEventListener("mousedown", () =>
-        
-        handleWindowTap(element)
-    
-    )
-}
-
-function handleWindowTap(element) {
-
-  biggestIndex++;
-
-  element.style.zIndex = biggestIndex;
-
-}
-
-var topBar = document.querySelector("#taskbar")
-
-function handleWindowTap(element) {
-
-  biggestIndex++;
-
-  element.style.zIndex = biggestIndex;
-
-  topBar.style.zIndex = biggestIndex + 1;
-
-  deselectIcon(selectedIcon)
-
-}
-
-function openWindow(element) {
-
-    element.style.top = "";
-
-    element.style.left = "";
-
-    element.style.transform = "";
-
-    element.style.display = "block";
-
-    biggestIndex++;
-
-    element.style.zIndex = biggestIndex;
-
-    topBar.style.zIndex = biggestIndex + 1;
-
-}
-
-var content = [
-
-    {
-
-        title: "Welcome",
-
-        date: "7/14/2026",
-
-        content: `
-            <div class="notes-content" contenteditable="true">
-
-                Welcome to <strong>BrickOS Notes</strong>
-                <br>
-                This is your app inside BrickOS to keep your thoughts, plans, or anything else you want, including ideas LEGO related! Remember, There is no end to <strong>CREATIVITY!</strong>
-                <br>
-                From, Me
-
-            </div>
-        `
-
-    }
-
-]
-
-function setNotesContent(index) {
-
-  currentNoteIndex = index;
-
-  var notesContent = document.querySelector("#notesContent")
-
-  notesContent.innerHTML = content[index].content
-
-}
-
-
-for (let i = 0; i < content.length; i++) {
-
-    addToSideBar(i);
-
-}
-
-setNotesContent(0)
-
-function addToSideBar(index) {
-
-    var sidebar = document.querySelector("#sidebar");
-
-    var note = content[index];
-
-    var newDiv = document.createElement("div");
-
-    newDiv.className = "notes-sidebar-item";
-
-    newDiv.innerHTML = `
-
-        <p class="notes-sidebar-title">
-            ${note.title}
-        </p>
-
-        <p class="notes-sidebar-date">
-            ${note.date}
-        </p>
-        
-        `;
-
-        newDiv.addEventListener("click", function() {
-
-            setNotesContent(index);
-
-        });
-
-        sidebar.appendChild(newDiv);
-
-}
-
-function saveNotes() {
-
-    localStorage.setItem("brickos-notes", JSON.stringify(content));
-
-}
-
-function loadNotes() {
-
-    var saved = localStorage.getItem("brickos-notes");
-
-    if (saved) {
-
-        content = JSON.parse(saved);
-
-    }
-
-}
-
-var notesContentDiv = document.querySelector("#notesContent")
-
 notesContentDiv.addEventListener("input", function() {
 
     content[currentNoteIndex].content = notesContentDiv.innerHTML;
@@ -372,3 +362,96 @@ notesContentDiv.addEventListener("input", function() {
     saveNotes();
 
 });
+
+loadNotes();
+
+for (let i = 0; i < content.length; i++) {
+
+    addToSideBar(i);
+
+}
+
+setNotesContent(0);
+
+/* ======================================================================
+                            Calendar App
+====================================================================== */
+var calendarScreen = document.querySelector("#calendar");
+
+timeText.addEventListener("click", function() {
+
+    if (calendarScreen.style.display === "block") {
+
+        closeWindow(calendarScreen);
+
+    } else {
+
+        buildCalendar();
+
+        openWindow(calendarScreen);
+
+    }
+
+});
+
+function buildCalendar() {
+
+    var now = new Date();
+
+    var year = now.getFullYear();
+
+    var month = now.getMonth();
+
+    var today = now.getDate();
+
+    var monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+    document.querySelector("#calendarMonthLabel").innerHTML = monthNames[month] + " " + year;
+
+    var grid = document.querySelector("#calendarGrid");
+
+    grid.innerHTML = "";
+
+    var dayLabels = ["Su","Mo","Tu","We","Th","Fr","Sa"];
+
+    for (let i = 0; i < 7; i++) {
+
+        var label = document.createElement("div");
+
+        label.className = "calendar-daylabel";
+
+        label.innerHTML = dayLabels[i];
+
+        grid.appendChild(label);
+
+    }
+
+    var firstDayIndex = new Date(year, month, 1).getDay();
+
+    var daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    for (let i = 0; i < firstDayIndex; i++) {
+
+        var empty = document.createElement("div");
+
+        empty.className = "calendar-day empty";
+
+        grid.appendChild(empty);
+
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+
+        var dayDiv = document.createElement("div");
+
+        dayDiv.className = "calendar-day";
+
+        if (day === today) dayDiv.classList.add("today");
+
+        dayDiv.innerHTML = day;
+
+        grid.appendChild(dayDiv);
+
+    }
+
+}
