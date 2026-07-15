@@ -7,7 +7,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
     padding: 20px;
-    background-image: url(./images/legomovie.jpg);
+    background-image: url(./Images/legomovie.jpg);
     background-size: cover;
     height: 90vh;
 }
