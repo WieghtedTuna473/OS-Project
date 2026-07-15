@@ -8,24 +8,30 @@
 
     <body>
 
+        <!-- ========================================================
+                            Taskbar
+        ========================================================= -->
         <div id="taskbar">
-        
+
             <p id="welcomeopen">BrickOS (Click to open Introduction)</p>
 
             <p id="timeElement">7/10/2026 3:45 PM</p>
 
         </div>
 
+        <!-- ========================================================
+                            Welcome Window
+        ========================================================= -->
         <div id="window" class="window">
 
             <div id="windowheader" class="windowheader">
-                
+
                 <span class="header-space"></span>
-                
+
                 <span>Welcome</span>
-                
+
                 <span id="welcomeclose" class="welcomeclose">✕</span>
-            
+
             </div>
 
             <div class="window-content">
@@ -42,6 +48,9 @@
 
         </div>
 
+        <!-- ========================================================
+                            Desktop Icons
+        ========================================================= -->
         <div id="desktopApps" style="padding-top: 5px;">
 
             <div class="desktop-icon" onclick="openWindow(imageScreen)" style="margin-top: 5px;">
@@ -62,16 +71,19 @@
 
         </div>
 
+        <!-- ========================================================
+                            Images App
+        ========================================================= -->
         <div id="images" class="window" style="display: none;">
 
             <div class="windowheader" id="imagesheader">
-                
+
                 <span class="header-space"></span>
-                
+
                 <span>Images</span>
-                
+
                 <span id="imageclose" class="welcomeclose">✕</span>
-            
+
             </div>
 
             <div class="window-content" id="image-content">
@@ -86,6 +98,9 @@
 
         </div>
 
+        <!-- ========================================================
+                            Notes App
+        ========================================================= -->
         <div id="notes" class="window" style="display: none;">
 
             <div class="windowheader" id="notesheader">
@@ -100,6 +115,7 @@
 
             <div class="notes-body">
 
+                <!-- Sidebar + New Note button -->
                 <div class="notes-sidebar-wrapper">
 
                     <div class="notes-sidebar" id="sidebar">
@@ -110,6 +126,7 @@
 
                 </div>
 
+                <!-- Note content editor -->
                 <div class="notes-content" id="notesContent" contenteditable="true">
 
                 </div>
@@ -117,8 +134,23 @@
             </div>
 
         </div>
+        
+        <!-- ========================================================
+                            Calendar App
+        ========================================================= -->
+        <div id="calendar" class="window" style="display: none; width: 320px;">
 
+            <div class="windowheader" id="calendarheader">
 
+                <span class="header-space"></span>
+
+                <span id="calendarMonthLabel">Calendar</span>
+
+            </div>
+
+            <div class="window-content" id="calendarGrid"></div>
+
+        </div>
 
         <script src="OSscript.js"></script>
 
