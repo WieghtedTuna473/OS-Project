@@ -69,6 +69,14 @@
 
             </div>
 
+            <div class="desktop-icon" onclick="openWindow(snakeScreen)" style="margin-top: 20px;">
+
+                <img src="./Images/" class="desktop-icon-img">
+
+                <p class="desktop-icon-label">Snake</p>
+
+            </div>
+
         </div>
 
         <!-- ========================================================
@@ -149,6 +157,33 @@
             </div>
 
             <div class="window-content" id="calendarGrid"></div>
+
+        </div>
+
+        <!-- ========================================================
+                            Snake Game App
+        ========================================================= -->
+        <div id="snake" class="window" style="width: 420px; display: none;">
+
+            <div class="windowheader" id="snakeheader">
+
+                <span class="header-space"></span>
+
+                <span>Snake</span>
+
+                <span id="snakeclose" class="welcomeclose">✕</span>
+
+            </div>
+
+            <div class="window-content" id="snake-content">
+
+                <p id="snakeScore">Score: 0</p>
+
+                <canvas id="snakeCanvas" width="360" height="360"></canvas>
+
+                <p id="snakeStatus">Click the board then use arrow keys.</p>
+
+            </div>
 
         </div>
 
