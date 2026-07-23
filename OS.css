@@ -316,6 +316,34 @@ body {
     font-weight: bold;
 }
 
+/* ===================================================
+                    Snake Game App CSS
+=================================================== */
+#snake-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+#snakeCanvas {
+    background-color: #E6B800;
+    border: 3px solid #1A1A1A;
+    border-radius: 8px;
+}
+
+#snakeScore {
+    font-weight: bold;
+    font-size: 16px;
+    margin: 0;
+}
+
+#snakeStatus {
+    font-size: 13px;
+    color: #555;
+    margin: 0;
+}
+
 .calendar-day.empty {
     background: none;
 }
