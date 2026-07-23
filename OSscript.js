@@ -455,3 +455,219 @@ function buildCalendar() {
     }
 
 }
+
+/* ======================================================================
+                            Snake Game
+====================================================================== */
+var snakeScreen = document.querySelector("#snake");
+
+var snakeScreenClose = document.querySelector("#snakeclose");
+
+var snakeCanvas = document.querySelector("#snakeCanvas");
+
+var snakeContext = snakeCanvas.getContext("2d");
+
+var snakeScoreLabel = document.querySelector("#snakeScore");
+
+var snakeStatusLabel = document.querySelector("#snakeStatus");
+
+dragElement(snakeScreen);
+makeResizable(snakeScreen);
+
+snakeScreenClose.addEventListener("click", function() {
+
+    closeWindow(snakeScreen);
+
+    stopSnakeLoop();
+
+});
+
+var gridSize = 20;
+
+var tileCount = snakeCanvas.width / gridSize;
+
+var snake = [{ x: 10, y: 10 }];
+
+var velocity = { x: 0, y: 0};
+
+var nextVelocity = { x: 0, y: 0};
+
+var food = { x: 5, y: 5 };
+
+var score = 0;
+
+var gameOver = false;
+
+var snakeInterval = null;
+
+function placeFood() {
+
+    food.x = Math.floor(Math.random() * tileCount);
+
+    food.y = Math.floor(Math.random() * tileCount);
+
+}
+
+function resetSnake() {
+
+    snake = [{ x: 10, y: 10 }];
+
+    velocity = { x: 0, y: 0 };
+
+    nextVelocity = { x: 0, y: 0};
+
+    score = 0;
+
+    gameOver = false;
+
+    snakeScoreLabel.innerHTML = "Score: 0";
+
+    snakeStatusLabel.innerHTML = "Click the board, then use arrow keys";
+
+    placeFood();
+
+}
+
+function drawSnake() {
+
+    snakeContext.clearRect(0, 0, snakeCanvas.width, snakeCanvas.height);
+
+    snakeContext.fillStyle = "#C4101A";
+
+    snake.forEach(function(segment) {
+
+        snakeContext.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize - 2, gridSize - 2);
+
+    });
+
+    snakeContext.fillStyle = "#1A1A1A";
+
+    snakeContext.fillRect(food.x * gridSize, food.y * gridSize, gridSize - 2, gridSize - 2);
+
+}
+
+function updateSnake() {
+
+    if (gameOver) return;
+
+    velocity = nextVelocity;
+
+    if (velocity.x === 0 && velocity.y === 0) return;
+
+    var head = { x: snake[0].x + velocity.x, y: snake [0].y + velocity.y };
+
+    if (head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount) {
+
+        endSnakeGame();
+
+        return;
+
+    }
+
+    for (let i = 0; i < snake.length; i++) {
+
+        if (snake[i].x === head.x && snake[i].y === head.y) {
+
+            endSnakeGame();
+
+            return;
+
+        }
+
+    }
+
+    snake.unshift(head);
+
+    if (head.x === food.x && head.y === food.y) {
+
+        score++;
+
+        snakeScoreLabel.innerHTML = "Score: " + score;
+
+        placeFood();
+
+    } else {
+
+        snake.pop();
+
+    }
+
+    drawSnake();
+
+}
+
+function endSnakeGame() {
+
+    gameOver = true;
+
+    snakeStatusLabel.innerHTML = "Game over! Click the board to restart";
+
+}
+
+function startSnakeLoop() {
+
+    stopSnakeLoop();
+
+    snakeInterval = setInterval(updateSnake, 120);
+
+}
+
+function stopSnakeLoop() {
+
+    if (snakeInterval) {
+
+        clearInterval(snakeInterval);
+
+        snakeInterval = null;
+
+    }
+
+}
+
+snakeCanvas.addEventListener("click", function() {
+
+    if (gameOver) {
+
+        resetSnake();
+
+        drawSnake();
+
+    }
+
+});
+
+document.addEventListener("keydown", function(e) {
+
+    if (snakeScreen.style.display !== "block") return;
+
+    if (e.key === "ArrowUp" && velocity.y !== 1) {
+
+        nextVelocity = { x: 0, y: -1 };
+
+    } else if (e.key === "ArrowDown" && velocity.y !== -1) {
+
+        nextVelocity = { x: 0, y: 1 }
+
+    } else if (e.key === "ArrowLeft" && velocity.x !== 1) {
+
+        nextVelocity = { x: -1, y: 0 };
+
+    } else if (e.key === "ArrowRight" && velocity.x !== -1) {
+
+        nextVelocity = { x: 1, y: 0 };
+
+    } else {
+
+        return;
+
+    }
+
+    e.preventDefault();
+
+});
+
+resetSnake();
+
+drawSnake();
+
+startSnakeLoop();
